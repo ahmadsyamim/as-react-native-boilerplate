@@ -43,6 +43,7 @@
     "@react-navigation/stack": "^5.0.0-alpha.38",
     "@shoutem/ui": "^1.0.4",
     "i18n-js": "^3.5.0",
+    "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.4",
     "react-native-gesture-handler": "^1.5.2",

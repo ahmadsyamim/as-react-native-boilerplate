@@ -206,7 +206,6 @@ const Container = styled.View `
       });
 
       return (<Screen>
-        <NavigationBar title="Shops" styleName="inline"/>
         <ListView data={groupedData} renderRow={renderRow}/>
       </Screen>);
     }

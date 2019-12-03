@@ -175,7 +175,6 @@ const Container = styled.View `
       };
 
       return (<Screen>
-        <NavigationBar title="Restaurants" styleName="inline"/>
         <ListView data={restaurants} renderRow={renderRow}/>
       </Screen>);
     }

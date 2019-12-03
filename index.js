@@ -3,6 +3,10 @@ import {
   YellowBox
 } from 'react-native';
 import App from './src/App';
+import {
+  gestureHandlerRootHOC
+} from 'react-native-gesture-handler'
+
 
 /**
  * React Native 0.54 warning message ignore.
@@ -15,4 +19,4 @@ YellowBox.ignoreWarnings([
   'Module RCTImageLoader',
 ]);
 
-AppRegistry.registerComponent('doobooApp', () => App);
+AppRegistry.registerComponent('doobooApp', () => gestureHandlerRootHOC(App));
