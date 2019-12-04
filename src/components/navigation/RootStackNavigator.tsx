@@ -1,6 +1,6 @@
 import {NavigationNativeContainer} from "@react-navigation/native";
 import React from "react";
-import DrawerScreen from "./Drawer";
+import HeaderScreen from "../shared/Header";
 import Splash from "../screen/Splash";
 import Login from "../screen/Login";
 import Register from "../screen/Register";
@@ -61,6 +61,7 @@ function CustomDrawerContent({
       }
     ]} style={styles.container}>
     <DrawerItemList navigation={navigation} {...rest}/>
+    <DrawerItem label="Shops" onPress={() => navigation.navigate("Shops")}/>
     <DrawerItem label="Logout" onPress={() => navigation.navigate("Logout")}/>
   </ScrollView>);
 }
@@ -79,27 +80,7 @@ const HomeStack = createStackNavigator();
 const ShopStack = createStackNavigator();
 
 const HeaderElement = ({previous, navigation, title}) => {
-  return (<Header>
-    <Left>
-      {
-        previous
-          ? (<Button transparent={true} onPress={navigation.goBack}>
-            <Icon name="arrow-back"/>
-          </Button>)
-          : (undefined)
-      }
-    </Left>
-    <Body>
-      <Title>{title}</Title>
-    </Body>
-    <Right>
-      <Button transparent={true} onPress={() => {
-          navigation.dispatch(DrawerActions.openDrawer());
-        }}>
-        <Icon name="menu"/>
-      </Button>
-    </Right>
-  </Header>);
+  return <HeaderScreen/>;
 };
 
 function HomeNavigator(): React.ReactElement {
@@ -113,7 +94,7 @@ function HomeNavigator(): React.ReactElement {
             ? options.title
             : scene.route.name;
 
-        return (<HeaderElement previous={previous} navigation={navigation} title={title}/>);
+        return (<HeaderScreen previous={previous} navigation={navigation} title={title}/>);
       }
     }}>
     <HomeStack.Screen name="Home" component={News} options={{
@@ -133,7 +114,7 @@ function ShopNavigator(): React.ReactElement {
             ? options.title
             : scene.route.name;
 
-        return (<HeaderElement previous={previous} navigation={navigation} title={title}/>);
+        return (<HeaderScreen previous={previous} navigation={navigation} title={title}/>);
       }
     }}>
     <ShopStack.Screen name="Shop" component={Shop} options={{
@@ -149,13 +130,6 @@ function TabNavigator(): React.ReactElement {
     <Tab.Screen name="Videos" component={Video}/>
     <Tab.Screen name="Temp" key="temp" component={Temp}/>
   </Tab.Navigator>);
-}
-
-function DrawerNavigator(): React.ReactElement {
-  return (<Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props}/>}>
-    <Drawer.Screen name="Home" component={TabNavigator}/>
-    <Drawer.Screen name="Shops" component={ShopNavigator}/>
-  </Drawer.Navigator>);
 }
 
 function RootNavigator(): React.ReactElement {
@@ -175,8 +149,8 @@ function RootNavigator(): React.ReactElement {
         }}/>
       <Root.Screen name="Login" component={Login}/>
       <Root.Screen name="Register" component={Register}/>
-      <Drawer.Screen name="Logout" component={Logout}/>
-      <Root.Screen name="Tab" component={DrawerNavigator} options={{
+      <Root.Screen name="Logout" component={Logout}/>
+      <Root.Screen name="Tab" component={TabNavigator} options={{
           headerShown: false
         }}/>
     </Root.Navigator>
